@@ -1,12 +1,16 @@
 import { createStore } from 'vuex'
+import files from './modules/files'
+import stages from './modules/stages'
+import links from './modules/links'
 
 export default createStore({
-  state: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
-  modules: {
-  }
+    modules: {
+        files,
+        stages,
+        links
+    },
+    state: {},
+    getters: {},
+    mutations: {},
+    actions: {}
 })

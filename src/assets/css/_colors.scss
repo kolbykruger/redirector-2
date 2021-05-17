@@ -1,0 +1,109 @@
+$color-base-000: #0c0e11;
+$color-base-100: #161a21;
+$color-base-200: #252c37;
+$color-primary: #ec5a50;
+$color-secondary: #50ec77;
+$color-tertiary: #61728f;
+$color-light-000: #ffffff;
+$color-light-100: #dfe3ea;
+
+$colors: (
+    default: (
+        0: #0c0e11,
+        1: #161a21,
+        2: #252c37
+    ),
+    base: (
+        0: #f9fafb,
+        1: #e4e7ec,
+        2: #d9dce3
+    ),
+    grey: (
+        0: #161a21,
+        1: #0c0e11
+    ),
+    primary: (
+        lightest: lighten(#ec5a50, 24%),
+        lighter: lighten(#ec5a50, 16%),
+        light: lighten(#ec5a50, 8%),
+        base: #ec5a50,
+        dark: darken(#ec5a50, 8%),
+        darker: darken(#ec5a50, 16%),
+        darkest: darken(#ec5a50, 24%)
+    ),
+    secondary: (
+        lightest: lighten(#57f287, 24%),
+        lighter: lighten(#57f287, 16%),
+        light: lighten(#57f287, 8%),
+        base: #0ccd48,
+        dark: darken(#57f287, 8%),
+        darker: darken(#57f287, 16%),
+        darkest: darken(#57f287, 24%)
+    ),
+    tertiary: (
+        lightest: lighten(#61728f, 24%),
+        lighter: lighten(#61728f, 16%),
+        light: lighten(#61728f, 8%),
+        base: #61728f,
+        dark: darken(#61728f, 8%),
+        darker: darken(#61728f, 16%),
+        darkest: darken(#61728f, 24%)
+    ),
+    quartnary: (
+        lightest: lighten(#eb459e, 24%),
+        lighter: lighten(#eb459e, 16%),
+        light: lighten(#eb459e, 8%),
+        base: #eb459e,
+        dark: darken(#eb459e, 8%),
+        darker: darken(#eb459e, 16%),
+        darkest: darken(#eb459e, 24%)
+    )
+);
+
+$dark: (
+    base: (
+        0: #0c0e11,
+        1: #161a21,
+        2: #252c37
+    ),
+    grey: (
+        0: #ffffff,
+        1: #dfe3ea
+    ),
+    default: (
+        0: #f9fafb,
+        1: #e4e7ec,
+        2: #d9dce3
+    )
+);
+
+//color
+@function c($color-name) {
+    @return var(--color-#{$color-name});
+}
+
+html {
+    transition: 1s ease;
+    //colors
+    @each $name, $color in $colors {
+        @if type-of($color) == 'map' {
+            @each $subname, $subcolor in $color {
+                --color-#{$name}-#{$subname}: #{$subcolor};
+            }
+        } @else {
+            --color-#{$name}: #{$color};
+        }
+    }
+
+    &[theme='dark'] {
+        @each $name, $color in $dark {
+            @if type-of($color) == 'map' {
+                @each $subname, $subcolor in $color {
+                    --color-#{$name}-#{$subname}: #{$subcolor};
+                }
+            } @else {
+                --color-#{$name}: #{$color};
+            }
+        }
+    }
+}
