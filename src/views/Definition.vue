@@ -3,8 +3,9 @@
         <Pageheading title="Definition" />
         <section>
             <div class="container">
+                <p>For the remaining links, you'll have to find the matches yourself.</p>
                 <p v-if="oldLinks && status">
-                    You have <span class="highlight">{{ oldLinks.length - selectedIndex }} links</span> remaining.
+                    There are <span class="highlight">{{ oldLinks.length - selectedIndex }} links</span> remaining.
                 </p>
             </div>
         </section>
@@ -18,7 +19,7 @@
                 />
             </div>
         </section>
-        <PageNavigation label="I'm done with this shit" :status="!status" to="/culmination" />
+        <PageNavigation label="Continue" :status="true" :arrow="true" to="/culmination" back="/algorithmic" />
     </div>
 </template>
 
@@ -40,7 +41,6 @@ export default {
     },
     methods: {
         incrementSelectedIndex() {
-            console.log(this.selectedIndex, this.oldLinks.length)
             if (this.selectedIndex == this.oldLinks.length - 1) {
                 this.status = false
             }

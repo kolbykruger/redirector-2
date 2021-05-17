@@ -1,7 +1,7 @@
 <template>
     <section class="pageheading">
         <div class="container">
-            <h1 class="font-size-300">{{ title }}</h1>
+            <h1 class="font-size-200">{{ title }}</h1>
         </div>
     </section>
 </template>
@@ -18,7 +18,7 @@ export default {
 <style lang="scss">
 .pageheading {
     margin-bottom: 5vh;
-    padding-top: 3vh;
+    padding-top: 5vh;
 
     h1 {
         margin-top: 0;

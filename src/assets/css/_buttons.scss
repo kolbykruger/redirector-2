@@ -37,9 +37,8 @@ button {
     color: #fff;
     background: $color-primary;
     border-radius: 0.4em;
-    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0.625em 1.25em rgba(35, 45, 75, 0.08);
     -webkit-mask-image: -webkit-radial-gradient(#fff, #000);
-    overflow: hidden;
 
     .icon,
     .label {
@@ -84,9 +83,23 @@ button {
     }
 
     &:hover {
+        box-shadow: 0 0.625em 1.25em rgba(35, 45, 75, 0.16);
+
         .hover {
             transform: scaleX(1);
             transform-origin: 0% 0%;
+        }
+    }
+
+    &:focus {
+        outline: none;
+    }
+
+    &--transparent {
+        background: c('base-1');
+
+        .hover {
+            background: c('base-0');
         }
     }
 
@@ -95,6 +108,14 @@ button {
         height: 52px;
         background: c('base-0');
         padding: 0.7em;
+
+        &--transparent {
+            background: none;
+
+            &:hover {
+                background: c('base-0');
+            }
+        }
     }
 
     &.button-size-small {

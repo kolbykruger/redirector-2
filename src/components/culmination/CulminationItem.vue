@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="link">
         <span class="ds">{{ delimiters.start }}</span
         ><span class="sp">{{ startpoint }}</span
         >{{ link.url.pathname }}<span class="dm">{{ delimiters.middle }}</span

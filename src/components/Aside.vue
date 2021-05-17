@@ -36,7 +36,7 @@ export default {
 
 <style lang="scss">
 aside {
-    --spacing: 1.5em;
+    --spacing: 2em;
     position: fixed;
     top: var(--spacing);
     left: var(--spacing);
@@ -46,22 +46,22 @@ aside {
     background: c('base-0');
     border-radius: 0.375em;
     box-shadow: 0 0.625em 1.25em rgba(35, 45, 75, 0.08);
-
     display: grid;
     grid-template-rows: 10% auto 10%;
+    z-index: 10;
 
     .logo {
-        margin-top: 1.5vh;
+        margin-top: 3vh;
         margin-bottom: 3vh;
         width: 100%;
 
         a {
         }
 
-        img {
+        svg {
             display: block;
             width: 100%;
-            max-width: 160px;
+            max-width: 170px;
         }
     }
 
@@ -77,7 +77,7 @@ aside {
 
     .nav-utility {
         display: flex;
-        justify-content: flex-end;
+        //justify-content: flex-end;
         align-items: flex-end;
         margin-bottom: 1em;
     }

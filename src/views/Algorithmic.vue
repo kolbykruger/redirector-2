@@ -4,7 +4,7 @@
         <!-- <pre><code>{{ links }}</code></pre> -->
         <section v-if="linksInThreshold">
             <div class="container">
-                <p>We use matching algorithms to find some potentially close matches.</p>
+                <p>Using matching algorithms, we'll try to find some suggestions for you.</p>
                 <p>
                     We found
                     <span class="highlight"
@@ -24,23 +24,21 @@
                 </p>
             </div>
         </section>
-        <section class="algorithmic">
+        <section class="algorithmic" v-if="linksInThreshold">
             <div class="container">
-                <transition name="slide" mode="out-in">
-                    <div v-if="linksInThreshold">
-                        <AlgorithmicItem
-                            v-for="link in linksInThreshold"
-                            :key="link.id"
-                            :link="link"
-                            :threshold="threshold"
-                            :comparison="newLinks"
-                        />
-                    </div>
-                </transition>
+                <transition-group name="algo" mode="in-out">
+                    <AlgorithmicItem
+                        v-for="link in linksInThreshold"
+                        :key="link.id"
+                        :link="link"
+                        :threshold="threshold"
+                        :comparison="newLinks"
+                    />
+                </transition-group>
             </div>
         </section>
 
-        <PageNavigation label="Let's move on" :status="true" to="/definition" />
+        <PageNavigation label="Continue" :status="true" to="/definition" />
     </div>
 </template>
 
@@ -56,7 +54,7 @@ export default {
         return {
             oldLinks: null,
             newLinks: null,
-            threshold: 0.9,
+            threshold: 0.85,
             thresholdOptions: [
                 { text: '75%', value: 0.75 },
                 { text: '80%', value: 0.8 },
@@ -95,6 +93,7 @@ select {
     color: c('primary-base');
     padding: 0 0.125em;
     line-height: 1.5;
+    font-weight: 500;
     border: none;
     border-bottom: 2px dashed c('primary-base');
     cursor: pointer;
@@ -102,5 +101,29 @@ select {
 
 .algorithmic {
     margin-top: 3em;
+    transition-duration: 0.3s;
+}
+
+.algo-move {
+    transition-duration: 0.3s;
+    transition-property: opacity, transform;
+}
+
+.algo-enter-active {
+    transition-duration: 0.3s;
+    transition-property: opacity, transform;
+    transition-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+    overflow: hidden;
+}
+.algo-leave-active {
+    transition-duration: 0.3s;
+    transition-property: opacity, transform;
+    transition-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+    overflow: hidden;
+}
+.algo-enter-from,
+.algo-leave-to {
+    opacity: 0;
+    transform: translate(0, -1em);
 }
 </style>

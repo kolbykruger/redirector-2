@@ -9,24 +9,29 @@
             </transition>
         </router-view>
     </main>
-    <span class="decor"></span>
+    <Decor :status="decor" />
 </template>
 
 <script>
 import Aside from '@/components/Aside'
+import Decor from '@/components/Decor'
 
 export default {
     components: {
-        Aside
+        Aside,
+        Decor
     },
     data() {
         return {
-            sidebar: false
+            sidebar: false,
+            decor: false
         }
     },
+    mounted() {},
     watch: {
         $route(value) {
-            this.sidebar = value.name != 'Home' ? true : false
+            this.sidebar = value.name.toLowerCase() != 'home' ? true : false
+            this.decor = value.name.toLowerCase() != 'home' ? true : false
         }
     }
 }
@@ -39,7 +44,6 @@ export default {
 
 body {
     @extend .font-family-sans;
-    padding-top: 12vh;
     font-size: 16px;
     background: c('base-1');
     color: c('default');
@@ -51,33 +55,23 @@ body {
 main {
     min-height: 80vh;
 
-    .page:not(#home) {
-        margin-left: 328px;
-    }
-}
-
-.decor {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 12vh;
-    background: c('tertiary-base');
-    // background-image: url('../public/abstract.svg');
-    background-size: cover;
-    background-position: center;
-    z-index: -1;
-    pointer-events: none;
-    user-select: none;
-    box-shadow: inset 0 0.625em 1.25em rgba(35, 45, 75, 0.08);
-
-    #home & {
-        transform: scaleX(0);
+    .page {
+        &:not(#home) {
+            margin-left: 328px;
+            margin-top: 15vh;
+        }
     }
 }
 
 .page {
     padding: 0 270px;
+
+    @media (max-width: 1920px) {
+        padding: 0 135px;
+    }
+    @media (max-width: 1350px) {
+        padding: 0 68px;
+    }
 }
 
 a {
@@ -153,6 +147,7 @@ label {
 
 .highlight {
     color: c('primary-base');
+    font-weight: 500;
 }
 
 ::selection {
@@ -163,7 +158,7 @@ label {
 .slide-leave-active {
     transition-duration: 0.6s;
     transition-property: opacity, transform;
-    transition-timing-function: cubic-bezier(0.55, 0, 0.1, 1);
+    transition-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
     overflow: hidden;
 }
 .slide-enter-from,
@@ -176,14 +171,14 @@ label {
     transition-duration: 0.6s;
     transition-delay: 0.6s;
     transition-property: opacity, transform;
-    transition-timing-function: cubic-bezier(0.55, 0, 0.1, 1);
+    transition-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
     overflow: hidden;
 }
 .sidebar-leave-active {
     transition-duration: 0.6s;
     transition-delay: 0s;
     transition-property: opacity, transform;
-    transition-timing-function: cubic-bezier(0.55, 0, 0.1, 1);
+    transition-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
     overflow: hidden;
 }
 .sidebar-enter-from,

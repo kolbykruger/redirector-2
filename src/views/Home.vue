@@ -1,5 +1,5 @@
 <template>
-    <div class="page" id="home">
+    <div id="home">
         <section class="logo-home">
             <div class="container">
                 <div class="logo">
@@ -53,7 +53,7 @@ export default {
 }
 
 .logo-home {
-    margin-top: 5vh;
+    margin-top: 10vh;
 
     .container {
         display: flex;
@@ -62,8 +62,9 @@ export default {
         max-width: 100%;
     }
 
-    img {
+    svg {
         max-width: 220px;
+        width: 100%;
     }
 }
 

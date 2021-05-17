@@ -94,7 +94,7 @@
         </section>
 
         <section class="redirects" v-if="links">
-            <div class="container">
+            <div class="container" v-if="links.length > 0">
                 <div class="grid grid-50">
                     <h3 class="font-size-base font-weight-medium">Redirects</h3>
                     <div class="redirects-actions">

@@ -1,14 +1,11 @@
 <template>
     <div class="intersection-item">
         <p class="font-family-mono font-size-000">{{ link.url.pathname }}</p>
-        <a class="button button-style-icon" target="_blank" rel="nofollow norefer" :href="link.url">
-            <External />
-        </a>
     </div>
 </template>
 
 <script>
-import External from '@/components/icons/External'
+//import External from '@/components/icons/External'
 
 export default {
     name: 'IntersectionItem',
@@ -18,7 +15,7 @@ export default {
         }
     },
     components: {
-        External
+        //External
     }
 }
 </script>
@@ -30,9 +27,10 @@ export default {
     align-items: center;
     justify-content: space-between;
     background: c('base-0');
-    padding: 0.65em 1.5em;
+    padding: 0.85em 1em;
     padding-right: 0.4em;
     margin-bottom: 0.5em;
     border-radius: 0.375em;
+    box-shadow: 0 0.625em 1.25em rgba(35, 45, 75, 0.08);
 }
 </style>

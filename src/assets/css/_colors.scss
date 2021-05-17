@@ -16,7 +16,8 @@ $colors: (
     base: (
         0: #f9fafb,
         1: #e4e7ec,
-        2: #d9dce3
+        2: #ccd0d9,
+        3: #ffffff
     ),
     grey: (
         0: #161a21,
@@ -32,13 +33,14 @@ $colors: (
         darkest: darken(#ec5a50, 24%)
     ),
     secondary: (
-        lightest: lighten(#57f287, 24%),
-        lighter: lighten(#57f287, 16%),
-        light: lighten(#57f287, 8%),
+        ghost: rgba(#0ccd48, 0.03),
+        lightest: lighten(#0ccd48, 24%),
+        lighter: lighten(#0ccd48, 16%),
+        light: lighten(#0ccd48, 8%),
         base: #0ccd48,
-        dark: darken(#57f287, 8%),
-        darker: darken(#57f287, 16%),
-        darkest: darken(#57f287, 24%)
+        dark: darken(#0ccd48, 8%),
+        darker: darken(#0ccd48, 16%),
+        darkest: darken(#0ccd48, 24%)
     ),
     tertiary: (
         lightest: lighten(#61728f, 24%),
@@ -64,7 +66,8 @@ $dark: (
     base: (
         0: #0c0e11,
         1: #161a21,
-        2: #252c37
+        2: #252c37,
+        3: #000000
     ),
     grey: (
         0: #ffffff,
@@ -74,6 +77,15 @@ $dark: (
         0: #f9fafb,
         1: #e4e7ec,
         2: #d9dce3
+    ),
+    secondary: (
+        lightest: lighten(#037426, 24%),
+        lighter: lighten(#037426, 16%),
+        light: lighten(#037426, 8%),
+        base: #037426,
+        dark: darken(#037426, 8%),
+        darker: darken(#037426, 16%),
+        darkest: darken(#037426, 24%)
     )
 );
 

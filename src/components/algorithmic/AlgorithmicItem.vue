@@ -2,14 +2,9 @@
     <section class="algorithmic-item" v-if="value && !status">
         <div class="container">
             <div class="algorithmic-item-line algorithmic-item-label">
+                <div class="algorithmic-item-title font-family-mono font-size-000">{{ link.url.pathname }}</div>
                 <div class="algorithmic-item-score font-family-mono">
                     <ArrowCornerCcwLB />
-                </div>
-                <div class="algorithmic-item-title font-family-mono font-size-000">{{ link.url.pathname }}</div>
-                <div class="algorithmic-item-link font-family-mono font-size-000">
-                    <a :href="link.url" target="_blank">
-                        <External />
-                    </a>
                 </div>
             </div>
 
@@ -20,35 +15,37 @@
                 class="algorithmic-item-line"
                 @click="select(match)"
             >
-                <div class="algorithmic-item-score font-family-mono">{{ (match.rating * 100).toFixed(0) }}%</div>
                 <div class="algorithmic-item-title font-family-mono font-size-000">{{ match.target }}</div>
-                <div class="algorithmic-item-link font-family-mono font-size-000">
-                    <a :href="match.link.url" target="_blank">
-                        <External />
-                    </a>
-                </div>
+                <div class="algorithmic-item-score font-family-mono">{{ (match.rating * 100).toFixed(0) }}%</div>
                 <span class="algorithmic-item-hover"></span>
             </button>
         </div>
         <div class="algorithmic-item-actions">
-            <button class="button button-style-icon algorithmic-item-actions--confirm" @click="confirm">
+            <button
+                class="button button-style-icon algorithmic-item-actions--confirm"
+                :disabled="!selection"
+                @click="confirm"
+            >
                 <Check />
             </button>
-            <button class="button button-style-icon algorithmic-item-actions--compare" @click="compare">
+            <!-- <button class="button button-style-icon algorithmic-item-actions--compare" @click="compare">
                 <Eye />
-            </button>
-            <button class="button button-style-icon algorithmic-item-actions--skip" @click="skip">
-                <Cross />
+            </button> -->
+            <button
+                class="button button-style-icon button-style-icon--transparent algorithmic-item-actions--skip"
+                @click="skip"
+            >
+                <Redo />
             </button>
         </div>
     </section>
 </template>
 
 <script>
-import External from '@/components/icons/External'
+//import External from '@/components/icons/External'
 import Check from '@/components/icons/Check'
-import Cross from '@/components/icons/Cross'
-import Eye from '@/components/icons/Eye'
+import Redo from '@/components/icons/Redo'
+// import Eye from '@/components/icons/Eye'
 import ArrowCornerCcwLB from '@/components/icons/ArrowCornerCcwLB'
 
 export default {
@@ -65,10 +62,10 @@ export default {
         }
     },
     components: {
-        External,
+        //External,
         Check,
-        Cross,
-        Eye,
+        Redo,
+        // Eye,
         ArrowCornerCcwLB
     },
     data() {
@@ -127,8 +124,8 @@ export default {
 .algorithmic-item {
     --radius: 0.375rem;
     display: grid;
-    grid-template-columns: auto 62px;
-    grid-gap: 0.65em;
+    grid-template-columns: auto 52px;
+    grid-gap: 1em;
     margin-bottom: 3em;
     max-width: 1100px;
 
@@ -141,17 +138,18 @@ export default {
 
     &-line {
         display: grid;
-        grid-template-columns: 52px auto 52px;
+        grid-template-columns: auto 52px;
         grid-gap: 1.5em;
         align-items: center;
         width: 100%;
-        padding: 0.65em;
+        padding: 0.85em;
         background: c('base-0');
         color: c('default-0');
         text-align: left;
 
         &-selected {
-            background: c('secondary-base');
+            background: c('secondary-ghost');
+            color: c('secondary-base');
         }
     }
 
@@ -162,7 +160,7 @@ export default {
     &-score {
         --size: 52px;
         width: var(--size);
-        height: var(--size);
+        //height: var(--size);
         display: grid;
         place-content: center;
         text-align: center;

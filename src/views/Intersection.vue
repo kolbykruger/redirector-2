@@ -20,7 +20,7 @@
             </div>
         </section>
 
-        <page-navigation label="Sounds good" to="/algorithmic" :status="true" />
+        <page-navigation label="Continue" to="/algorithmic" :status="true" :arrow="true" />
     </div>
 </template>
 

@@ -24,8 +24,6 @@ export default {
                 if (item.id == payload.id) {
                     item.redirect = payload.link
                     item.status = true
-
-                    console.log(item)
                 }
             })
         },

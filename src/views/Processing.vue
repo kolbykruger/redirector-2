@@ -1,15 +1,28 @@
 <template>
     <div class="page" id="processing">
         <Pageheading title="Processing" />
-        <section v-if="!status">
+
+        <section class="process-stats">
             <div class="container">
-                <div class="spinner">
-                    {{ timer.time }}
+                <p>Your sitemaps have been processed. Here's what we found.</p>
+                <div class="grid">
+                    <div class="process-stats-item">
+                        <p class="process-stats-item-value font-family-mono font-size-100">
+                            {{ $store.state.links.links.old.length }}
+                        </p>
+                        <p class="process-stats-item-label">Old website links</p>
+                    </div>
+                    <div class="process-stats-item">
+                        <p class="process-stats-item-value font-family-mono font-size-100">
+                            {{ $store.state.links.links.new.length }}
+                        </p>
+                        <p class="process-stats-item-label">New website links</p>
+                    </div>
                 </div>
-                <p>Processing links...</p>
             </div>
         </section>
-        <PageNavigation label="That was fast! Let's go" :status="true" to="/intersection" :arrow="false" />
+
+        <PageNavigation label="Continue" :status="true" to="/intersection" :arrow="true" />
     </div>
 </template>
 
@@ -21,12 +34,7 @@ export default {
         return {
             newLinks: [],
             oldLinks: [],
-            status: false,
-            timer: {
-                time: 0,
-                running: false,
-                interval: null
-            }
+            status: false
         }
     },
     methods: {
@@ -61,7 +69,6 @@ export default {
 
                 _this.$store.commit('addLink', { type: 'old', link: $Link })
             })
-            this.timer.running = false
         },
         createLink(link, type) {
             const url = this.createURL(link)
@@ -118,18 +125,9 @@ export default {
             })
 
             return ratings
-        },
-        incrementTime() {
-            if (this.timer.running) {
-                this.timer.time = this.timer.time + 1
-            }
         }
     },
     mounted() {
-        //Start a timer
-        this.timer.running = true
-        this.timer.interval = setInterval(this.incrementTime, 1000)
-
         const rawOldLinks = this.$store.getters.getFileData('old')
         const rawNewLinks = this.$store.getters.getFileData('new')
 
@@ -150,4 +148,24 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.process-stats {
+    .grid {
+        margin-top: 3em;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 1.5em;
+    }
+
+    &-item {
+        padding: 1em;
+        background: c('base-0');
+        border-radius: 0.375em;
+        box-shadow: 0 0.625em 1.25em rgba(35, 45, 75, 0.08);
+
+        &-value {
+            margin: 0.25em 0;
+        }
+    }
+}
+</style>

@@ -1,24 +1,33 @@
 <template>
-    <div>
-        <button class="button">
+    <div class="dwnld">
+        <!-- <button class="button">
             <span class="hover"></span>
             <span class="icon">
                 <Diskette />
             </span>
             <span class="label">Save & Download</span>
-        </button>
+        </button> -->
+        <p class="font-size-000 font-weight-medium">Created by Kolby Kruger</p>
     </div>
 </template>
 
 <script>
-import Diskette from '../components/icons/Diskette'
+//import Diskette from '../components/icons/Diskette'
 
 export default {
     name: 'Download',
     components: {
-        Diskette
+        //Diskette
     }
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+p {
+    text-align: center;
+    opacity: 0.5;
+}
+.dwnld {
+    width: 100%;
+}
+</style>

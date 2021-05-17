@@ -4,7 +4,6 @@
         <section>
             <div class="container">
                 <p>Please attach your sitemaps for both the new and old website.</p>
-                <p>All of your files are saved locally, and nothing is uploaded to a server.</p>
             </div>
         </section>
         <section class="data">
@@ -21,7 +20,7 @@
 import FileUpload from '@/components/FileUpload'
 
 export default {
-    name: 'About',
+    name: 'Data',
     components: {
         FileUpload
     },
