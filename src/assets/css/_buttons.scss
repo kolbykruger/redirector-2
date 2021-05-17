@@ -97,6 +97,11 @@ button {
 
     &--transparent {
         background: c('base-1');
+        color: c('default-1');
+
+        .icon svg path {
+            fill: c('default-1');
+        }
 
         .hover {
             background: c('base-0');

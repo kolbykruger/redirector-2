@@ -11,10 +11,14 @@
         >
             <span class="file-upload-hover"></span>
             <div class="file-upload-icon">
-                <div class="file-upload-icon-default">
-                    <FileUploadIcon v-if="!file && !uploading" />
-                    <Loader v-if="uploading" />
-                    <Check v-if="file && !uploading" />
+                <div class="file-upload-icon-default" v-if="!file && !uploading">
+                    <FileUploadIcon />
+                </div>
+                <div class="file-upload-icon-uploading" v-if="uploading">
+                    <Loader />
+                </div>
+                <div class="file-upload-icon-uploaded" v-if="file && !uploading">
+                    <Check />
                 </div>
             </div>
 
@@ -208,7 +212,7 @@ export default {
         left: 0;
         width: 100%;
         height: 100%;
-        background: c('base-2');
+        background: c('base-3');
         transform: scaleX(0);
         transform-origin: 100% 100%;
         transition: transform 0.6s cubic-bezier(0.53, 0.21, 0, 1);
@@ -220,6 +224,8 @@ export default {
         display: flex;
         grid-gap: 1.4em;
         align-items: center;
+        pointer-events: none;
+        user-select: none;
 
         &-title {
             margin: 0;
@@ -227,7 +233,7 @@ export default {
 
         &-descriptor {
             margin: 0;
-            color: $color-tertiary;
+            color: c('tertiary-base');
         }
     }
 
@@ -236,6 +242,8 @@ export default {
         width: 52px;
         height: 52px;
         border-radius: 0.4em;
+        pointer-events: none;
+        user-select: none;
         overflow: hidden;
 
         svg {
@@ -244,30 +252,33 @@ export default {
             padding: 0.7em;
 
             path {
-                fill: $color-primary;
+                fill: c('primary-base');
             }
         }
 
         &-default {
-            background: rgba($color-primary, 0.1);
+            background: c('primary-ghost');
         }
 
         &-drop {
-            background: rgba($color-tertiary, 0.1);
+            background: c('secondary-ghost');
 
             svg path {
-                fill: $color-tertiary;
+                fill: c('secondary-base');
             }
         }
 
         &-uploading {
+            svg path {
+                fill: c('tertiary-base');
+            }
         }
 
         &-uploaded {
-            background: rgba($color-secondary, 0.1);
+            background: c('secondary-ghost');
 
             svg path {
-                fill: $color-secondary;
+                fill: c('secondary-base');
             }
         }
     }
@@ -280,10 +291,14 @@ export default {
             height: 52px;
             border-radius: 0.4em;
 
+            svg path {
+                fill: c('tertiary-base');
+            }
+
             &:hover,
             &:focus {
                 svg path {
-                    fill: $color-primary;
+                    fill: c('primary-base');
                 }
             }
         }

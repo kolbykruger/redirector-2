@@ -19,9 +19,11 @@
                     </select>
                     or higher.
                 </p>
-                <p class="hint" v-if="linksInThreshold.length == 0">
-                    You can try lowering or increasing the probability to restrict the suggestions.
-                </p>
+                <Hint
+                    title="Adjust the probability"
+                    description="You can try lowering or increasing the probability to restrict the suggestions."
+                    v-if="linksInThreshold.length == 0"
+                />
             </div>
         </section>
         <section class="algorithmic" v-if="linksInThreshold">
@@ -44,11 +46,13 @@
 
 <script>
 import AlgorithmicItem from '../components/algorithmic/AlgorithmicItem.vue'
+import Hint from '../components/utility/Hint.vue'
 
 export default {
     name: 'Algorithmic',
     components: {
-        AlgorithmicItem
+        AlgorithmicItem,
+        Hint
     },
     data() {
         return {

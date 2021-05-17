@@ -12,17 +12,23 @@
                 <FileUpload type="new" label="New Sitemap" @sendStatus="updateFileStatus" />
             </div>
         </section>
-        <PageNavigation label="Look's good" v-bind:status="status" to="/processing" />
+        <Hint
+            title="Sitemap Generator"
+            description="If you need to generate a sitemap, I recommend using <a href='https://www.xml-sitemaps.com/' target='_blank'>XML Sitemap's Generator</a>."
+        />
+        <PageNavigation label="Continue" v-bind:status="status" to="/processing" />
     </div>
 </template>
 
 <script>
 import FileUpload from '@/components/FileUpload'
+import Hint from '@/components/utility/Hint'
 
 export default {
     name: 'Data',
     components: {
-        FileUpload
+        FileUpload,
+        Hint
     },
     data() {
         return {

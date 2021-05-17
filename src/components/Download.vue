@@ -7,7 +7,7 @@
             </span>
             <span class="label">Save & Download</span>
         </button> -->
-        <p class="font-size-000 font-weight-medium">Created by Kolby Kruger</p>
+        <p class="font-size-000 font-weight-medium">BETA VERSION</p>
     </div>
 </template>
 

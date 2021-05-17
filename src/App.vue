@@ -42,6 +42,10 @@ export default {
     box-sizing: border-box;
 }
 
+#app {
+    min-height: 100vh;
+}
+
 body {
     @extend .font-family-sans;
     font-size: 16px;
@@ -53,9 +57,11 @@ body {
 }
 
 main {
-    min-height: 80vh;
+    min-height: 85vh;
 
     .page {
+        min-height: 85vh;
+
         &:not(#home) {
             margin-left: 328px;
             margin-top: 15vh;

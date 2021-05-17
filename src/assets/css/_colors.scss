@@ -24,6 +24,7 @@ $colors: (
         1: #0c0e11
     ),
     primary: (
+        ghost: rgba(#ec5a50, 0.1),
         lightest: lighten(#ec5a50, 24%),
         lighter: lighten(#ec5a50, 16%),
         light: lighten(#ec5a50, 8%),
