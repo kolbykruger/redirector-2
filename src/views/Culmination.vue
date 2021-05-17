@@ -97,12 +97,12 @@
             <div class="container" v-if="links.length > 0">
                 <div class="grid grid-50">
                     <h3 class="font-size-base font-weight-medium">Redirects</h3>
-                    <div class="redirects-actions">
+                    <!-- <div class="redirects-actions">
                         <button class="button button-size-small" @click="copy">
                             <span class="hover"></span>
                             <span class="label">Copy</span>
                         </button>
-                    </div>
+                    </div> -->
                 </div>
                 <pre><code><CulminationItem
                     v-for="link in links"
