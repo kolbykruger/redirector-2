@@ -28,7 +28,6 @@ export default {
     methods: {
         checkShowing() {
             this.stages.forEach(item => {
-                console.log(item)
                 if (item.stage == 'intersection') {
                     this.shown = item.status
                 }
