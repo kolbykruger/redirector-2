@@ -27,21 +27,19 @@
                 </li>
             </ul>
         </nav>
-        <div class="nav-utility">
-            <Download />
-        </div>
+        <Statistics :stages="routes" />
     </aside>
 </template>
 
 <script>
-import Download from '../components/Download'
+import Statistics from '../components/utility/Statistics'
 import Logo from '../components/Logo'
 
 export default {
     name: 'Aside',
     components: {
-        Download,
-        Logo
+        Logo,
+        Statistics
     },
     data() {
         return {
@@ -95,8 +93,9 @@ aside {
     background: c('base-0');
     border-radius: 0.375em;
     box-shadow: 0 0.625em 1.25em rgba(35, 45, 75, 0.08);
-    display: grid;
-    grid-template-rows: 10% auto 10%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
     z-index: 10;
 
     .logo {
@@ -115,7 +114,7 @@ aside {
     }
 
     nav {
-        margin-bottom: 10vh;
+        margin-bottom: 5vh;
         ul {
             display: flex;
             flex-flow: column;

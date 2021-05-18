@@ -28,8 +28,8 @@
 </template>
 
 <script>
-import DefinitionItem from '../components/definition/DefinitionItem.vue'
-import Hint from '../components/utility/Hint.vue'
+import DefinitionItem from '@/components/definition/DefinitionItem.vue'
+import Hint from '@/components/utility/Hint.vue'
 
 export default {
     name: 'Definition',

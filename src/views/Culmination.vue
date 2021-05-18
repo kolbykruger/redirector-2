@@ -114,8 +114,6 @@
                 /></code></pre>
             </div>
         </section>
-
-        <PageNavigation label="Back" :arrow="false" :status="true" to="/definition" />
     </div>
 </template>
 
