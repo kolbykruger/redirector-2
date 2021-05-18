@@ -219,6 +219,11 @@ label {
     }
 }
 
+h3 {
+    display: flex;
+    align-items: center;
+}
+
 pre {
     @extend .font-family-mono;
     color: c('default-0');

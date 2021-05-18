@@ -27,7 +27,9 @@ export default {
             decor: false
         }
     },
-    mounted() {},
+    mounted() {
+        document.getElementById('app').style.minHeight = window.innerHeight + 'px'
+    },
     watch: {
         $route(value) {
             this.sidebar = value.name.toLowerCase() != 'home' ? true : false
@@ -43,7 +45,6 @@ export default {
 }
 
 #app {
-    min-height: 100vh;
 }
 
 body {

@@ -1,6 +1,6 @@
 <template>
     <section class="hint" v-if="show">
-        <div class="hint-icon" @click="show = !show">
+        <div class="hint-icon">
             <i fill="currentColor" style="display: inline-block;"
                 ><svg
                     fill="none"
@@ -23,6 +23,9 @@
         </p>
         <div class="hint-description" v-if="description">
             <p class="hint-text font-size-000" v-html="description"></p>
+        </div>
+        <div class="hint-dismiss">
+            <button class="font-weight-medium" @click="show = !show">Dismiss</button>
         </div>
     </section>
 </template>
@@ -62,18 +65,21 @@ export default {
     border-left: 0.25em solid c('quartnary-base');
     border-radius: 0.275em;
     box-shadow: 0 0.625em 1.25em rgba(35, 45, 75, 0.08);
+    visibility: hidden;
     opacity: 0;
     transform: translate(0, 3em);
-    animation-delay: 0.3s;
+    animation-delay: 0.6s;
     animation: hint-enter 0.3s cubic-bezier(0.53, 0.21, 0, 1) forwards;
     user-select: none;
 
     @keyframes hint-enter {
         from {
+            visibility: hidden;
             opacity: 0;
             transform: translate(0, 3em);
         }
         to {
+            visibility: visible;
             opacity: 1;
             transform: translate(0, 0);
         }
@@ -95,7 +101,21 @@ export default {
         }
     }
     &-title {
-        margin-bottom: 0.25em;
+        margin-bottom: 0.5em;
+    }
+    &-dismiss {
+        text-align: left;
+        margin-top: 1em;
+
+        button {
+            color: c('default-0');
+            font-size: 1rem;
+            padding: 0;
+
+            &:hover {
+                color: c('quartnary-base');
+            }
+        }
     }
 }
 </style>

@@ -407,6 +407,6 @@ export default {
 
 <style lang="scss" scoped>
 svg .blob {
-    mix-blend-mode: hard-light;
+    opacity: 0.75;
 }
 </style>

@@ -77,7 +77,7 @@ export default {
 }
 
 .logo-home {
-    margin-top: 10vh;
+    padding-top: 10vh;
 
     .container {
         display: flex;

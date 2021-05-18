@@ -7,6 +7,10 @@
                 <p v-if="oldLinks && status">
                     There are <span class="highlight">{{ oldLinks.length - selectedIndex }} links</span> remaining.
                 </p>
+                <Hint
+                    title="Faster searching"
+                    description="Click on any section of the url to add that term to the search query. You can select multiple."
+                />
             </div>
         </section>
         <section class="definition" v-if="status">
@@ -25,11 +29,13 @@
 
 <script>
 import DefinitionItem from '../components/definition/DefinitionItem.vue'
+import Hint from '../components/utility/Hint.vue'
 
 export default {
     name: 'Definition',
     components: {
-        DefinitionItem
+        DefinitionItem,
+        Hint
     },
     data() {
         return {
