@@ -247,6 +247,9 @@ export default {
     }
 
     &-label {
+        display: grid;
+        grid-template-columns: auto 32px;
+        grid-gap: 0.65em;
         background: c('base-2');
         border-radius: 0.375em 0.375em 0 0;
     }
@@ -295,7 +298,7 @@ export default {
     }
 
     &-search-results {
-        max-height: 40vh;
+        max-height: 47.5vh;
         border-radius: 0 0 0.375em 0.375em;
         overflow: auto;
     }
@@ -306,10 +309,14 @@ export default {
         text-align: left;
         color: c('default-0');
         //background: c('base-2');
-        transition: color 0.6s;
+        transition: color 0.6s, background 0.3s;
 
         &-selected {
             color: c('secondary-base');
+        }
+
+        &:hover {
+            background: c('base-1');
         }
 
         &:hover,

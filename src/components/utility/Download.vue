@@ -6,7 +6,7 @@
                 <Terminal /> -->
             <!-- <Diskette />
             </span> -->
-            <span class="label">BETA VERSION</span>
+            <span class="label">BETA</span>
         </button>
         <p class="font-size-000 font-weight-medium"></p>
     </div>
@@ -39,6 +39,13 @@ p {
         width: 100%;
         justify-content: center;
         margin-right: 0;
+        background: c('base-1');
+        color: c('default-2');
+        letter-spacing: 0.125em;
+
+        .hover {
+            background: c('base-2');
+        }
     }
 }
 </style>

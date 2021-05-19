@@ -14,3 +14,9 @@ export default {
     name: 'Cross'
 }
 </script>
+
+<style lang="scss" scoped>
+svg path {
+    fill: c('default-2');
+}
+</style>

@@ -1,44 +1,46 @@
 <template>
-    <section class="algorithmic-item" v-if="value && !status">
-        <div class="container">
-            <div class="algorithmic-item-line algorithmic-item-label">
-                <div class="algorithmic-item-title font-family-mono font-size-000">{{ link.url.pathname }}</div>
-                <div class="algorithmic-item-score font-family-mono">
-                    <ArrowCornerCcwLB />
+    <transition name="algo" mode="out-in">
+        <section class="algorithmic-item" v-if="value && !status">
+            <div class="container">
+                <div class="algorithmic-item-line algorithmic-item-label">
+                    <div class="algorithmic-item-title font-family-mono font-size-000">{{ link.url.pathname }}</div>
+                    <div class="algorithmic-item-score font-family-mono">
+                        <ArrowCornerCcwLB />
+                    </div>
                 </div>
-            </div>
 
-            <button
-                v-for="match in link.matches"
-                :key="match.link.id"
-                :class="{ 'algorithmic-item-line-selected': isMatch(match) }"
-                class="algorithmic-item-line"
-                @click="select(match)"
-            >
-                <div class="algorithmic-item-title font-family-mono font-size-000">{{ match.target }}</div>
-                <div class="algorithmic-item-score font-family-mono">{{ (match.rating * 100).toFixed(0) }}%</div>
-                <span class="algorithmic-item-hover"></span>
-            </button>
-        </div>
-        <div class="algorithmic-item-actions">
-            <button
-                class="button button-style-icon algorithmic-item-actions--confirm"
-                :disabled="!selection"
-                @click="confirm"
-            >
-                <Check />
-            </button>
-            <!-- <button class="button button-style-icon algorithmic-item-actions--compare" @click="compare">
+                <button
+                    v-for="match in link.matches"
+                    :key="match.link.id"
+                    :class="{ 'algorithmic-item-line-selected': isMatch(match) }"
+                    class="algorithmic-item-line"
+                    @click="select(match)"
+                >
+                    <div class="algorithmic-item-title font-family-mono font-size-000">{{ match.target }}</div>
+                    <div class="algorithmic-item-score font-family-mono">{{ (match.rating * 100).toFixed(0) }}%</div>
+                    <span class="algorithmic-item-hover"></span>
+                </button>
+            </div>
+            <div class="algorithmic-item-actions">
+                <button
+                    class="button button-style-icon algorithmic-item-actions--confirm"
+                    :disabled="!selection"
+                    @click="confirm"
+                >
+                    <Check />
+                </button>
+                <!-- <button class="button button-style-icon algorithmic-item-actions--compare" @click="compare">
                 <Eye />
             </button> -->
-            <button
-                class="button button-style-icon button-style-icon--transparent algorithmic-item-actions--skip"
-                @click="skip"
-            >
-                <Redo />
-            </button>
-        </div>
-    </section>
+                <button
+                    class="button button-style-icon button-style-icon--transparent algorithmic-item-actions--skip"
+                    @click="skip"
+                >
+                    <Redo />
+                </button>
+            </div>
+        </section>
+    </transition>
 </template>
 
 <script>

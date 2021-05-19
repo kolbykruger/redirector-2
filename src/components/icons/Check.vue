@@ -14,3 +14,9 @@ export default {
     name: 'Check'
 }
 </script>
+
+<style lang="scss" scoped>
+svg path {
+    fill: c('secondary-base');
+}
+</style>

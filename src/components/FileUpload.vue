@@ -11,13 +11,16 @@
         >
             <span class="file-upload-hover"></span>
             <div class="file-upload-icon">
-                <div class="file-upload-icon-default" v-if="!file && !uploading">
+                <div class="file-upload-icon-default" v-if="!file && !uploading && !inDragZone">
                     <FileUploadIcon />
                 </div>
-                <div class="file-upload-icon-uploading" v-if="uploading">
+                <div class="file-upload-icon-uploading" v-if="uploading && !inDragZone">
                     <Loader />
                 </div>
-                <div class="file-upload-icon-uploaded" v-if="file && !uploading">
+                <div class="file-upload-icon-uploading" v-if="inDragZone">
+                    <CloudUpload />
+                </div>
+                <div class="file-upload-icon-uploaded" v-if="file && !uploading && !inDragZone">
                     <Check />
                 </div>
             </div>
@@ -54,6 +57,7 @@ import FileUploadIcon from '../components/icons/FileUploadIcon'
 import Loader from '../components/icons/Loader'
 import Check from '../components/icons/Check'
 import Cross from '../components/icons/Cross'
+import CloudUpload from '../components/icons/CloudUpload'
 
 export default {
     name: 'FileUpload',
@@ -65,7 +69,8 @@ export default {
         FileUploadIcon,
         Loader,
         Check,
-        Cross
+        Cross,
+        CloudUpload
     },
     data() {
         return {
@@ -269,8 +274,9 @@ export default {
         }
 
         &-uploading {
+            background: c('secondary-ghost');
             svg path {
-                fill: c('tertiary-base');
+                fill: c('secondary-base');
             }
         }
 

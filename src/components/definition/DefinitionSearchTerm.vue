@@ -23,11 +23,19 @@
             </span>
         </span>
     </div>
+    <button class="definition-item-terms-action" @click="toggleAllSearchTerms">
+        <Brackets />
+    </button>
 </template>
 
 <script>
+import Brackets from '@/components/icons/Brackets'
+
 export default {
     name: 'DefinitionSearchTerm',
+    components: {
+        Brackets
+    },
     props: {
         pathname: {
             type: String
@@ -70,6 +78,18 @@ export default {
 
             this.$emit('selectedSearchTerm', this.selected.join(' '))
         },
+        toggleAllSearchTerms() {
+            const reducedTerms = this.terms.filter(term => {
+                return term.length > 1
+            })
+            if (this.selected.length == reducedTerms.length) {
+                this.selected = []
+                this.$emit('selectedSearchTerm', this.selected.join(' '))
+                return false
+            }
+            this.selected = reducedTerms
+            this.$emit('selectedSearchTerm', reducedTerms.join(' '))
+        },
         isSelected(term) {
             const found = this.selected.filter(item => {
                 return item == term
@@ -110,6 +130,28 @@ export default {
 
 <style lang="scss">
 .definition-item-terms {
+    &-action {
+        --size: 32px;
+        width: 32px;
+        height: 32px;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0.375em;
+        opacity: 0.5;
+
+        &:hover {
+            background: c('base-1');
+            opacity: 1;
+            box-shadow: 0 0.625em 1.25em rgba(35, 45, 75, 0.08);
+        }
+
+        &:hover,
+        &:focus {
+            outline: none;
+        }
+    }
 }
 
 .definition-item-term {

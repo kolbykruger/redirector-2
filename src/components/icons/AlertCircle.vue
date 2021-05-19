@@ -14,3 +14,9 @@ export default {
     name: 'AlertCircle'
 }
 </script>
+
+<style lang="scss" scoped>
+svg path {
+    fill: c('default-0');
+}
+</style>

@@ -1,6 +1,6 @@
 <template>
     <span ref="decor" class="decor" :class="{ 'decor-expanded': status }">
-        <img src="/decor.jpg" alt="" />
+        <img src="/decor-2.jpg" alt="" />
     </span>
 </template>
 
@@ -31,6 +31,28 @@ export default {
     &.decor-expanded {
         transition-delay: 0.05s;
         max-height: 15vh;
+    }
+
+    &::before,
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    &::before {
+        background: linear-gradient(to bottom, transparent, rgba(35, 45, 75, 0.16));
+        z-index: 1;
+    }
+
+    &::after {
+        background-image: url('/noise.png');
+        background-blend-mode: overlay;
+        opacity: 0.45;
+        z-index: 2;
     }
 
     img {

@@ -6,11 +6,20 @@
             </router-link>
         </div>
         <nav>
+            <span class="progress">
+                <span class="progress-bar" :style="{ maxHeight: progress }"></span>
+            </span>
             <ul>
                 <li v-for="(route, index) in routes" :key="index">
-                    <router-link v-if="route.status" class="navigation-link" :to="'/' + route.stage">
+                    <router-link
+                        v-if="route.status"
+                        class="navigation-link navigation-link--active"
+                        :to="'/' + route.stage"
+                    >
                         <span class="navigation-link-circle">
-                            <span class="navigation-link-circle--dot"></span>
+                            <span class="navigation-link-circle-bg"></span>
+                            <span class="navigation-link-circle-dot"></span>
+                            <span class="navigation-link-circle-ping"></span>
                         </span>
                         <span class="navigation-link-title">
                             {{ route.stage }}
@@ -18,7 +27,9 @@
                     </router-link>
                     <div class="navigation-link navigation-link--disabled" v-else>
                         <span class="navigation-link-circle">
-                            <span class="navigation-link-circle--dot"></span>
+                            <span class="navigation-link-circle-bg"></span>
+                            <span class="navigation-link-circle-dot"></span>
+                            <span class="navigation-link-circle-ping"></span>
                         </span>
                         <span class="navigation-link-title">
                             {{ route.stage }}
@@ -43,7 +54,8 @@ export default {
     },
     data() {
         return {
-            routes: []
+            routes: [],
+            progress: '0%'
         }
     },
     methods: {
@@ -62,10 +74,22 @@ export default {
                     status: value
                 })
             }
+        },
+        progressCalculator() {
+            const trues = this.routes.filter(item => {
+                return item.status == true
+            })
+
+            if (trues.length == this.routes.length) {
+                this.progress = 'calc(100% + 1.75em)'
+            } else {
+                this.progress = (trues.length / this.routes.length) * 100 + '%'
+            }
         }
     },
     mounted() {
         this.getStages()
+        this.progressCalculator()
     },
     watch: {
         $route(to) {
@@ -76,6 +100,7 @@ export default {
                 })
             }
             this.getStages()
+            this.progressCalculator()
         }
     }
 }
@@ -103,9 +128,6 @@ aside {
         margin-bottom: 3vh;
         width: 100%;
 
-        a {
-        }
-
         svg {
             display: block;
             width: 100%;
@@ -114,12 +136,23 @@ aside {
     }
 
     nav {
+        display: grid;
+        grid-template-columns: 5px auto;
+        grid-gap: 1.5em;
         margin-bottom: 5vh;
+        margin-left: 0.5em;
+
         ul {
-            display: flex;
-            flex-flow: column;
-            justify-content: center;
             height: 100%;
+            padding-top: 1.5em;
+
+            li {
+                &:last-of-type {
+                    .navigation-link {
+                        margin-bottom: 0;
+                    }
+                }
+            }
         }
 
         .navigation-link {
@@ -128,71 +161,108 @@ aside {
             align-items: center;
             text-transform: capitalize;
             line-height: 1;
-            margin-bottom: 1em;
-
-            &::before {
-                content: '';
-                position: absolute;
-                width: 0.125em;
-                height: 100%;
-                top: 100%;
-                left: 0;
-                transform: translate(calc(0.5em - (0.125em / 2)), 0);
-                background: c('primary-base');
-                border-radius: 0.125em;
-            }
+            margin-bottom: 1.25em;
 
             &-circle {
-                --size: 1em;
-                display: flex;
-                align-items: center;
-                justify-content: center;
+                position: absolute;
+                top: 55%;
+                left: 0;
+                --size: 11px;
                 width: var(--size);
                 height: var(--size);
-                background: c('base-0');
-                margin-right: 1em;
                 border-radius: 50%;
+                background: c('base-2');
+                transform: translate(calc(-1.5em + 3px), -50%);
+                z-index: 2;
 
-                &--dot {
-                    --size: 0.45em;
-                    display: flex;
-                    width: var(--size);
-                    height: var(--size);
-                    background: c('primary-base');
+                &-bg,
+                &-dot,
+                &-ping {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
                     border-radius: 50%;
+                }
+
+                &-bg {
+                    background: green;
+                    background: c('base-0');
+                    transform: scale(1.75);
+                    z-index: 1;
+                }
+
+                &-dot {
+                    background: c('base-2');
+                    z-index: 3;
+                }
+
+                &-ping {
+                    background: c('base-2');
+                    border: 3px solid c('base-2');
+                    transform: scale(0.75);
+                    z-index: 2;
                 }
             }
 
             &--disabled {
                 color: c('tertiary-base');
                 cursor: not-allowed;
+            }
 
-                .navigation-link-circle {
-                    &--dot {
-                        background: c('tertiary-lightest');
+            &--active {
+                .navigation-link-circle-dot {
+                    animation: dot 0.6s 0.3s cubic-bezier(0.53, 0.21, 0, 1) forwards;
+
+                    @keyframes dot {
+                        to {
+                            background: c('primary-base');
+                        }
                     }
                 }
-
-                &::before {
-                    background: c('tertiary-lightest');
-                }
             }
-        }
 
-        li:last-of-type {
-            .navigation-link {
-                &::before {
-                    display: none;
+            &.router-link-exact-active {
+                .navigation-link-circle {
+                    &-ping {
+                        animation: ping 2.5s cubic-bezier(0.53, 0.21, 0, 1) infinite;
+
+                        @keyframes ping {
+                            from {
+                                transform: scale(0.75);
+                                opacity: 1;
+                            }
+                            to {
+                                transform: scale(2.75);
+                                opacity: 0;
+                            }
+                        }
+                    }
                 }
             }
         }
     }
 
-    .nav-utility {
-        display: flex;
-        //justify-content: flex-end;
-        align-items: flex-end;
-        margin-bottom: 1em;
+    .progress {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 100%;
+        background: c('base-1');
+        border-radius: 0.375em;
+
+        &-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 200%;
+            max-height: 0;
+            background: c('primary-base');
+            border-radius: 0.375em;
+            transition: max-height 0.6s cubic-bezier(0.53, 0.21, 0, 1);
+        }
     }
 }
 </style>

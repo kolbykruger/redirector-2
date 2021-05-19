@@ -71,6 +71,7 @@ export default {
     animation-delay: 0.6s;
     animation: hint-enter 0.3s cubic-bezier(0.53, 0.21, 0, 1) forwards;
     user-select: none;
+    z-index: 10;
 
     @keyframes hint-enter {
         from {

@@ -28,15 +28,13 @@
         </section>
         <section class="algorithmic" v-if="linksInThreshold">
             <div class="container">
-                <transition-group name="algo" mode="in-out">
-                    <AlgorithmicItem
-                        v-for="link in linksInThreshold"
-                        :key="link.id"
-                        :link="link"
-                        :threshold="threshold"
-                        :comparison="newLinks"
-                    />
-                </transition-group>
+                <AlgorithmicItem
+                    v-for="link in linksInThreshold"
+                    :key="link.id"
+                    :link="link"
+                    :threshold="threshold"
+                    :comparison="newLinks"
+                />
             </div>
         </section>
 

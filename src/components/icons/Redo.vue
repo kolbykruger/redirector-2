@@ -14,3 +14,9 @@ export default {
     name: 'Redo'
 }
 </script>
+
+<style lang="scss" scoped>
+svg path {
+    fill: c('default-2');
+}
+</style>

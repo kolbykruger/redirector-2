@@ -10,16 +10,19 @@
         </router-view>
     </main>
     <Decor :status="decor" />
+    <Theme />
 </template>
 
 <script>
 import Aside from '@/components/Aside'
 import Decor from '@/components/Decor'
+import Theme from '@/components/theme/Theme'
 
 export default {
     components: {
         Aside,
-        Decor
+        Decor,
+        Theme
     },
     data() {
         return {
