@@ -139,7 +139,11 @@ export default {
         align-items: center;
         justify-content: center;
         border-radius: 0.375em;
-        opacity: 0.5;
+        opacity: 0.65;
+
+        svg path {
+            fill: c('tertiary-base');
+        }
 
         &:hover {
             background: c('base-1');
@@ -173,11 +177,11 @@ export default {
     }
 
     &--selected {
-        color: c('secondary-base');
-        border-color: c('secondary-base');
+        color: c('quartnary-base');
+        border-color: c('quartnary-base');
 
         &:hover {
-            border-color: c('quartnary-base');
+            border-color: c('primary-base');
         }
     }
 }
