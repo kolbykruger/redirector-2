@@ -5,7 +5,7 @@
                 <input
                     class="font-family-mono font-size-000"
                     type="text"
-                    placeholder="Search..."
+                    placeholder="Search... (/ to focus)"
                     v-model="term"
                     @keydown="search"
                     ref="definitionSearch"
@@ -207,6 +207,15 @@ export default {
         if (_this.link) {
             this.$refs.definitionSearch.focus()
         }
+
+        //Focus search on keyup of Slash /
+        document.addEventListener('keyup', e => {
+            if (e.code === 'Slash') {
+                if (document.activeElement.tagName != 'INPUT') {
+                    _this.$refs.definitionSearch.focus()
+                }
+            }
+        })
     },
     watch: {
         term(value) {
@@ -348,8 +357,8 @@ export default {
                 display: flex;
                 align-items: center;
                 transform: translate(0.7em, -50%);
-                color: $color-tertiary;
-                background: $color-base-000;
+                color: c('tertiary-base');
+                background: c('default-0');
                 height: 34px;
                 padding: 0 0.7em;
                 border-radius: 0.4em;
@@ -363,7 +372,7 @@ export default {
                     top: 50%;
                     width: 0.5em;
                     height: 0.5em;
-                    background: $color-base-000;
+                    background: c('default-0');
                     transform: translate(-30%, -50%) rotate(45deg);
                     border-radius: 0.125em;
                     z-index: -1;

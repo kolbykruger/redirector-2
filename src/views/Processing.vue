@@ -148,7 +148,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .process-stats {
     .grid {
         margin-top: 3em;

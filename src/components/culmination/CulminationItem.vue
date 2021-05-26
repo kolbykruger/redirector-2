@@ -1,9 +1,9 @@
 <template>
     <div v-if="link">
         <span class="ds">{{ delimiters.start }}</span
-        ><span class="sp">{{ startpoint }}</span
+        ><span class="sp">{{ validStartpoint }}</span
         >{{ link.url.pathname }}<span class="dm">{{ delimiters.middle }}</span
-        ><span class="ep">{{ endpoint }}</span
+        ><span class="ep">{{ validEndpoint }}</span
         >{{ link.redirect[0].url.pathname }}<span class="de">{{ delimiters.end }}</span
         ><span class="dl">{{ delimiters.line }}</span>
         <br />
@@ -25,6 +25,19 @@ export default {
         },
         endpoint: {
             type: String
+        }
+    },
+    computed: {
+        validEndpoint() {
+            return this.pointValidator(this.endpoint)
+        },
+        validStartpoint() {
+            return this.pointValidator(this.startpoint)
+        }
+    },
+    methods: {
+        pointValidator(point) {
+            return point.slice(-1) == '/' ? point.slice(0, -1) : point
         }
     }
 }

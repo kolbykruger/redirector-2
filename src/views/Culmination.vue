@@ -14,7 +14,7 @@
                             type="text"
                             placeholder="https://www.old-website.com"
                             v-model="urls.start"
-                            @keyup="validateEndpoint('start')"
+                            @keyup="validateEndpoint('start', 'startError')"
                         />
                         <span class="font-size-000 error" v-if="urls.startError">{{ urls.startError }}</span>
                     </label>
@@ -26,7 +26,7 @@
                             type="text"
                             placeholder="https://www.new-website.com"
                             v-model="urls.end"
-                            @keyup="validateEndpoint('end')"
+                            @keyup="validateEndpoint('end', 'endError')"
                         />
                         <span class="font-size-000 error" v-if="urls.endError">{{ urls.endError }}</span>
                     </label>
@@ -85,8 +85,8 @@
                         />
                     </label>
                     <!-- <div class="buttons">
-                        <button class="button button-size-small">
-                            <span>.htaccess</span>
+                        <button class="button button-secondary button-size-small">
+                            <span>Prefill .htaccess</span>
                         </button>
                     </div> -->
                 </div>
@@ -96,7 +96,10 @@
         <section class="redirects" v-if="links">
             <div class="container" v-if="links.length > 0">
                 <div class="grid grid-50">
-                    <h3 class="font-size-base font-weight-medium">Redirects</h3>
+                    <h3 class="font-size-base font-weight-medium">
+                        Redirects&nbsp;
+                        <span>({{ links.length }})</span>
+                    </h3>
                     <!-- <div class="redirects-actions">
                         <button class="button button-size-small" @click="copy">
                             <span class="hover"></span>
@@ -135,7 +138,7 @@ export default {
                 line: ''
             },
             urls: {
-                start: 'https://old-website.com',
+                start: '',
                 end: 'https://new-website.com',
                 startError: '',
                 endError: ''
@@ -143,13 +146,18 @@ export default {
         }
     },
     methods: {
-        validateEndpoint() {
-            const endpoint = this.endpoint
+        validateEndpoint(type, typeError) {
+            const endpoint = this.urls[type]
+            if (endpoint.length < 1) {
+                this.urls[typeError] = ''
+                return false
+            }
+
             try {
                 new URL(endpoint)
-                this.endpointError = ''
+                this.urls[typeError] = ''
             } catch {
-                this.endpointError = 'Must be a valid URL'
+                this.urls[typeError] = 'Must be a valid URL'
             }
         },
         copy() {}
