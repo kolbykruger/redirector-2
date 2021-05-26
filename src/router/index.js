@@ -41,7 +41,18 @@ const routes = [
 
 const router = createRouter({
     history: createWebHistory(process.env.BASE_URL),
-    routes
+    routes,
+    scrollBehavior(to, from, savedPosition) {
+        console.log(to)
+        console.log(from)
+        console.log(savedPosition)
+        // always scroll to top
+        return new Promise(resolve => {
+            setTimeout(() => {
+                resolve({ left: 0, top: 0, behavior: 'smooth' })
+            }, 300)
+        })
+    }
 })
 
 export default router
