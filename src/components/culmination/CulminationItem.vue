@@ -2,7 +2,7 @@
     <div v-if="link">
         <span class="ds">{{ delimiters.start }}</span
         ><span class="sp">{{ validStartpoint }}</span
-        >{{ link.url.pathname }}<span class="dm">{{ delimiters.middle }}</span
+        >{{ oldPathName }}<span class="dm">{{ delimiters.middle }}</span
         ><span class="ep">{{ validEndpoint }}</span
         >{{ link.redirect[0].url.pathname }}<span class="de">{{ delimiters.end }}</span
         ><span class="dl">{{ delimiters.line }}</span>
@@ -15,17 +15,17 @@ export default {
     name: 'CulminationItem',
     props: {
         link: {
-            type: Object
+            type: Object,
         },
         delimiters: {
-            type: Object
+            type: Object,
         },
         startpoint: {
-            type: String
+            type: String,
         },
         endpoint: {
-            type: String
-        }
+            type: String,
+        },
     },
     computed: {
         validEndpoint() {
@@ -33,13 +33,19 @@ export default {
         },
         validStartpoint() {
             return this.pointValidator(this.startpoint)
-        }
+        },
+        oldPathName() {
+            const pathname = link.url.pathname
+            const firstChar = pathname.charAt(0)
+
+            return firstChar == '/' ? pathname.slice(1) : pathname
+        },
     },
     methods: {
         pointValidator(point) {
             return point.slice(-1) == '/' ? point.slice(0, -1) : point
-        }
-    }
+        },
+    },
 }
 </script>
 
