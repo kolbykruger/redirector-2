@@ -35,7 +35,7 @@ export default {
             return this.pointValidator(this.startpoint)
         },
         oldPathName() {
-            const pathname = link.url.pathname
+            const pathname = this.link.url.pathname
             const firstChar = pathname.charAt(0)
 
             return firstChar == '/' ? pathname.slice(1) : pathname
