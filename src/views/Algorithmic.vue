@@ -1,6 +1,6 @@
 <template>
     <div class="page" id="algorithmic">
-        <Pageheading title="Algorithmic" />
+        <Pageheading title="We found some suggestions!" />
         <!-- <pre><code>{{ links }}</code></pre> -->
         <section v-if="linksInThreshold">
             <div class="container">
@@ -13,9 +13,9 @@
                     >
                     using a probability of
                     <select v-model="threshold" @change="getLinksInThreshold">
-                        <option v-for="option in thresholdOptions" v-bind:value="option.value" :key="option.value">{{
-                            option.text
-                        }}</option>
+                        <option v-for="option in thresholdOptions" v-bind:value="option.value" :key="option.value">
+                            {{ option.text }}
+                        </option>
                     </select>
                     or higher.
                 </p>
@@ -50,7 +50,7 @@ export default {
     name: 'Algorithmic',
     components: {
         AlgorithmicItem,
-        Hint
+        Hint,
     },
     data() {
         return {
@@ -62,9 +62,9 @@ export default {
                 { text: '80%', value: 0.8 },
                 { text: '85%', value: 0.85 },
                 { text: '90%', value: 0.9 },
-                { text: '95%', value: 0.95 }
+                { text: '95%', value: 0.95 },
             ],
-            linksInThreshold: null
+            linksInThreshold: null,
         }
     },
     computed: {},
@@ -73,7 +73,7 @@ export default {
             this.linksInThreshold = this.oldLinks.filter(link => {
                 return link.matches[0].rating >= this.threshold && link.status != true
             })
-        }
+        },
     },
     mounted() {
         const oldLinks = this.$store.getters.getLinks('old')
@@ -82,7 +82,7 @@ export default {
             return link.status != true
         })
         this.getLinksInThreshold()
-    }
+    },
 }
 </script>
 

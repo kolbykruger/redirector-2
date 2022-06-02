@@ -23,31 +23,47 @@
             </span>
         </span>
     </div>
-    <button class="definition-item-terms-action" @click="toggleAllSearchTerms">
+
+    <button class="definition-item-terms-action" @click="toggleAllSearchTerms" title="Insert all search terms">
         <Brackets />
     </button>
+    <a
+        :href="url.url"
+        v-if="url"
+        target="_black"
+        rel="nofollow norefer"
+        class="definition-item-terms-action"
+        title="Open link in new tab"
+    >
+        <External />
+    </a>
 </template>
 
 <script>
 import Brackets from '@/components/icons/Brackets'
+import External from '@/components/icons/External'
 
 export default {
     name: 'DefinitionSearchTerm',
     components: {
-        Brackets
+        Brackets,
+        External,
     },
     props: {
         pathname: {
-            type: String
+            type: String,
+        },
+        url: {
+            type: Object,
         },
         searchTerm: {
-            type: String
-        }
+            type: String,
+        },
     },
     data() {
         return {
             terms: [],
-            selected: []
+            selected: [],
         }
     },
     methods: {
@@ -97,7 +113,7 @@ export default {
             if (found.length > 0) {
                 return true
             }
-        }
+        },
     },
     mounted() {
         this.createTerms()
@@ -117,14 +133,14 @@ export default {
             if (value != this.selected.join(' ')) {
                 this.selected = []
             }
-        }
+        },
         // selected: {
         //     handler() {
         //         //this.$emit('selectedSearchTerm', value.join(''))
         //     },
         //     deep: true
         // }
-    }
+    },
 }
 </script>
 

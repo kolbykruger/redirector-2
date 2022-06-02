@@ -14,7 +14,7 @@ $colors: (
         2: #252c37
     ),
     base: (
-        0: #f9fafb,
+        0: #f1f4f9,
         1: #e4e7ec,
         2: #ccd0d9,
         3: #ffffff
@@ -35,6 +35,7 @@ $colors: (
     ),
     secondary: (
         ghost: rgba(#0ccd48, 0.03),
+        ghost-two: rgba(#0ccd48, 0.2),
         lightest: lighten(#0ccd48, 24%),
         lighter: lighten(#0ccd48, 16%),
         light: lighten(#0ccd48, 8%),

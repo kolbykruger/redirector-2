@@ -1,6 +1,6 @@
 <template>
     <div class="page" id="culmination">
-        <Pageheading title="Culmination" />
+        <Pageheading title="Customize your redirects" />
 
         <section class="points">
             <div class="container">
@@ -126,7 +126,7 @@ import CulminationItem from '../components/culmination/CulminationItem'
 export default {
     name: 'Culmination',
     components: {
-        CulminationItem
+        CulminationItem,
     },
     data() {
         return {
@@ -135,14 +135,14 @@ export default {
                 start: 'RewriteRule ^',
                 middle: '$ ',
                 end: ' [R=301,L]',
-                line: ''
+                line: '',
             },
             urls: {
                 start: '',
                 end: 'https://new-website.com',
                 startError: '',
-                endError: ''
-            }
+                endError: '',
+            },
         }
     },
     methods: {
@@ -160,7 +160,7 @@ export default {
                 this.urls[typeError] = 'Must be a valid URL'
             }
         },
-        copy() {}
+        copy() {},
     },
     mounted() {
         // Empty links
@@ -171,7 +171,7 @@ export default {
         this.links = links.filter(link => {
             return link.status == true
         })
-    }
+    },
 }
 </script>
 

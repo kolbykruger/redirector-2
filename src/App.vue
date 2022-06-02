@@ -1,7 +1,7 @@
 <template>
-    <transition name="sidebar" mode="in-out">
+    <!--transition name="sidebar" mode="in-out">
         <Aside v-if="sidebar" />
-    </transition>
+    </transition-->
     <main>
         <router-view v-slot="{ Component }">
             <transition name="slide" mode="out-in">
@@ -22,12 +22,12 @@ export default {
     components: {
         Aside,
         Decor,
-        Theme
+        Theme,
     },
     data() {
         return {
             sidebar: false,
-            decor: false
+            decor: false,
         }
     },
     mounted() {
@@ -37,7 +37,7 @@ export default {
         $route(value) {
             this.sidebar = value.name.toLowerCase() != 'home' ? true : false
             this.decor = value.name.toLowerCase() != 'home' ? true : false
-        }
-    }
+        },
+    },
 }
 </script>

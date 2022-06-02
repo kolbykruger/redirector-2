@@ -1,6 +1,6 @@
 <template>
     <div class="page" id="processing">
-        <Pageheading title="Processing" />
+        <Pageheading title="Beep. Boop. Processing..." />
 
         <section class="process-stats">
             <div class="container">
@@ -34,7 +34,7 @@ export default {
         return {
             newLinks: [],
             oldLinks: [],
-            status: false
+            status: false,
         }
     },
     methods: {
@@ -76,7 +76,7 @@ export default {
                 id: this.createStringHash(link),
                 status: false,
                 type: type,
-                url: url
+                url: url,
             }
         },
         createURL(link) {
@@ -125,7 +125,7 @@ export default {
             })
 
             return ratings
-        }
+        },
     },
     mounted() {
         const rawOldLinks = this.$store.getters.getFileData('old')
@@ -134,7 +134,7 @@ export default {
         // Disbatch the new links for processing
         this.processNewLinks({
             links: rawNewLinks,
-            type: 'new'
+            type: 'new',
         })
 
         const newLinks = this.newLinks
@@ -142,9 +142,9 @@ export default {
         this.processOldLinks({
             oldLinks: rawOldLinks,
             newLinks: newLinks,
-            type: 'old'
+            type: 'old',
         })
-    }
+    },
 }
 </script>
 

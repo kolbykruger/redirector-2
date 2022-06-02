@@ -17,6 +17,7 @@
                 <div class="definition-item-line definition-item-label font-family-mono font-size-000">
                     <DefinitionSearchTerm
                         :pathname="link.url.pathname"
+                        :url="link"
                         :searchTerm="term"
                         @selectedSearchTerm="setTermFromSelection"
                     />
@@ -40,28 +41,42 @@
                         <div v-if="term.length > 1">
                             <div v-if="results.length > 0">
                                 <transition-group name="search" mode="in-out">
-                                    <button
-                                        class="definition-item-search-result definition-item-title font-family-mono font-size-000"
-                                        :class="{ 'definition-item-search-result-selected': isMatch(result.item.id) }"
+                                    <div
+                                        class="definition-item-search-result"
+                                        :class="{ 'definition-item-search-result-selected': isMatch(result.id) }"
                                         v-for="result in results"
                                         :key="result.item.id"
-                                        @click="select(result.item)"
                                     >
-                                        {{ result.item.url.pathname }}
-                                    </button>
+                                        <button
+                                            class="definition-item-title font-family-mono font-size-000"
+                                            @click="select(result.item)"
+                                        >
+                                            {{ result.item.url.pathname }}
+                                        </button>
+                                        <a :href="result.item.url" target="_blank" rel="norefer nofollow">
+                                            <External />
+                                        </a>
+                                    </div>
                                 </transition-group>
                             </div>
                         </div>
                         <div class="definition-item-search-results" v-else>
-                            <button
-                                class="definition-item-search-result definition-item-title font-family-mono font-size-000"
+                            <div
+                                class="definition-item-search-result"
                                 :class="{ 'definition-item-search-result-selected': isMatch(result.id) }"
                                 v-for="result in comparison"
                                 :key="result.id"
-                                @click="select(result)"
                             >
-                                {{ result.url.pathname }}
-                            </button>
+                                <button
+                                    class="definition-item-title font-family-mono font-size-000"
+                                    @click="select(result)"
+                                >
+                                    {{ result.url.pathname }}
+                                </button>
+                                <a :href="result.url" target="_blank" rel="norefer nofollow">
+                                    <External />
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -103,16 +118,17 @@ import Cross from '@/components/icons/Cross'
 //import Edit from '@/components/icons/Edit'
 //import EditSlash from '@/components/icons/EditSlash'
 import Search from '@/components/icons/Search'
+import External from '@/components/icons/External'
 
 export default {
     name: 'DefinitionItem',
     props: {
         link: {
-            type: Object
+            type: Object,
         },
         comparison: {
-            type: Array
-        }
+            type: Array,
+        },
     },
     components: {
         DefinitionSearchTerm,
@@ -120,7 +136,8 @@ export default {
         Cross,
         //Edit,
         //EditSlash,
-        Search
+        Search,
+        External,
     },
     data() {
         return {
@@ -130,8 +147,8 @@ export default {
             selection: null,
             custom: {
                 status: false,
-                url: ''
-            }
+                url: '',
+            },
         }
     },
     methods: {
@@ -149,7 +166,7 @@ export default {
             this.$store.commit('setRedirect', {
                 type: this.link.type,
                 id: this.link.id,
-                link: this.selection
+                link: this.selection,
             })
             this.reset()
         },
@@ -196,13 +213,13 @@ export default {
             //Sets the search term if selected from the term buttons
             this.term = value
             this.search()
-        }
+        },
     },
     mounted() {
         const _this = this
         this.fuse = new Fuse(_this.comparison, {
             includeScore: true,
-            keys: ['url.pathname']
+            keys: ['url.pathname'],
         })
         if (_this.link) {
             this.$refs.definitionSearch.focus()
@@ -222,8 +239,8 @@ export default {
             if (value.length < 1) {
                 this.results = []
             }
-        }
-    }
+        },
+    },
 }
 </script>
 
@@ -257,7 +274,7 @@ export default {
 
     &-label {
         display: grid;
-        grid-template-columns: auto 32px;
+        grid-template-columns: auto 32px 32px;
         grid-gap: 0.65em;
         background: c('base-2');
         border-radius: 0.375em 0.375em 0 0;
@@ -313,24 +330,52 @@ export default {
     }
 
     &-search-result {
-        display: block;
+        display: grid;
+        grid-template-columns: auto calc(32px + 0.85em);
+        grid-column-gap: 1em;
         width: 100%;
         text-align: left;
         color: c('default-0');
         //background: c('base-2');
+        padding: 0;
         transition: color 0.6s, background 0.3s;
+
+        button {
+            color: c('default-0');
+            text-align: left;
+            width: 100%;
+            transition: color 0.6s, background 0.3s;
+            padding: 0.85em;
+
+            &:hover {
+                background: c('base-1');
+            }
+
+            &:hover,
+            &:focus {
+                outline: none;
+            }
+        }
+
+        a {
+            --size: 32px;
+            width: 32px;
+            height: 32px;
+            display: flex;
+
+            svg {
+                position: relative;
+                top: auto;
+                left: auto;
+            }
+
+            svg path {
+                color: c('default-0');
+            }
+        }
 
         &-selected {
             color: c('secondary-base');
-        }
-
-        &:hover {
-            background: c('base-1');
-        }
-
-        &:hover,
-        &:focus {
-            outline: none;
         }
     }
 

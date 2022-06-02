@@ -1,6 +1,6 @@
 <template>
     <div class="page" id="about">
-        <Pageheading title="Data" />
+        <Pageheading title="Upload your sitemaps" />
         <section>
             <div class="container">
                 <p>Please attach your sitemaps for both the new and old website.</p>
@@ -28,14 +28,14 @@ export default {
     name: 'Data',
     components: {
         FileUpload,
-        Hint
+        Hint,
     },
     data() {
         return {
             fileStatus: {
                 old: false,
-                new: false
-            }
+                new: false,
+            },
         }
     },
     computed: {
@@ -44,18 +44,18 @@ export default {
                 return true
             }
             return false
-        }
+        },
     },
     methods: {
         updateFileStatus(value) {
             this.fileStatus[value.type] = value.status
-        }
+        },
     },
     watch: {
         $state(value) {
             console.log(value)
-        }
-    }
+        },
+    },
 }
 </script>
 

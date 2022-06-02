@@ -1,15 +1,14 @@
 <template>
     <div class="page" id="intersection">
-        <Pageheading title="Intersection" />
+        <Pageheading title="Saving you from a headache" />
 
         <section class="intersection">
             <div class="container">
-                <p>
-                    An intersection is when two URL pathnames match exactly, and could cause redirect issues.
-                </p>
+                <p>An intersection is when two URL pathnames match exactly, and could cause redirect issues.</p>
                 <p>
                     We'll automatically remove the
-                    <span class="highlight">{{ intersections.length }} intersections</span> we found for you.
+                    <span class="highlight">{{ intersections.length }} intersections</span> we found for you, so that
+                    they don't cause problems later.
                 </p>
             </div>
         </section>
@@ -34,7 +33,7 @@ export default {
         return {
             oldLinks: null,
             newLinks: null,
-            intersections: []
+            intersections: [],
         }
     },
     methods: {
@@ -56,13 +55,13 @@ export default {
         removeIntersection(link) {
             this.intersections.push(link)
             this.$store.commit('removeLink', { type: link.type, id: link.id })
-        }
+        },
     },
     mounted() {
         this.oldLinks = this.$store.getters.getLinks('old')
         this.newLinks = this.$store.getters.getLinks('new')
         this.findIntersections()
-    }
+    },
 }
 </script>
 

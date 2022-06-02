@@ -1,6 +1,6 @@
 <template>
     <div class="page" id="definition">
-        <Pageheading title="Definition" />
+        <Pageheading title="Help us find matches" />
         <section>
             <div class="container">
                 <p>For the remaining links, you'll have to find the matches yourself.</p>
@@ -35,14 +35,14 @@ export default {
     name: 'Definition',
     components: {
         DefinitionItem,
-        Hint
+        Hint,
     },
     data() {
         return {
             newLinks: null,
             oldLinks: null,
             selectedIndex: 0,
-            status: true
+            status: true,
         }
     },
     methods: {
@@ -51,7 +51,7 @@ export default {
                 this.status = false
             }
             this.selectedIndex++
-        }
+        },
     },
     mounted() {
         const oldLinks = this.$store.getters.getLinks('old')
@@ -59,7 +59,7 @@ export default {
         this.oldLinks = oldLinks.filter(link => {
             return link.status != true
         })
-    }
+    },
 }
 </script>
 

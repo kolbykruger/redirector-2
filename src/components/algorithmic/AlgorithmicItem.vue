@@ -54,26 +54,26 @@ export default {
     name: 'AlgorithmicItem',
     props: {
         link: {
-            type: Object
+            type: Object,
         },
         threshold: {
-            type: Number
+            type: Number,
         },
         comparison: {
-            type: Array
-        }
+            type: Array,
+        },
     },
     components: {
         //External,
         Check,
         Redo,
         // Eye,
-        ArrowCornerCcwLB
+        ArrowCornerCcwLB,
     },
     data() {
         return {
             selection: null,
-            status: false
+            status: false,
         }
     },
     computed: {
@@ -82,7 +82,7 @@ export default {
                 return false
             }
             return true
-        }
+        },
     },
     methods: {
         confirm() {
@@ -98,7 +98,7 @@ export default {
             this.$store.commit('setRedirect', {
                 type: this.link.type,
                 id: this.link.id,
-                link: elem
+                link: elem,
             })
             this.status = true
         },
@@ -114,11 +114,11 @@ export default {
             if (match == this.selection) {
                 return true
             }
-        }
+        },
     },
     mounted() {
         this.selection = this.link.matches[0]
-    }
+    },
 }
 </script>
 
@@ -150,8 +150,8 @@ export default {
         text-align: left;
 
         &-selected {
-            background: c('secondary-ghost');
-            color: c('secondary-base');
+            background: c('secondary-ghost-two');
+            //color: c('secondary-base');
         }
     }
 
