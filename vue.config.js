@@ -6,9 +6,9 @@ module.exports = {
             // so this assumes you have a file named `src/variables.sass`
             // Note: this option is named as "prependData" in sass-loader v8
             sass: {
-                prependData: `@import "@/assets/css/styles.scss";`
-            }
-        }
+                prependData: `@import "@/assets/css/styles.scss";`,
+            },
+        },
     },
     chainWebpack: config => {
         const svgRule = config.module.rule('svg')
@@ -21,5 +21,5 @@ module.exports = {
             .end()
             .use('vue-svg-loader')
             .loader('vue-svg-loader')
-    }
+    },
 }

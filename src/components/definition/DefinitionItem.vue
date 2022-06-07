@@ -7,7 +7,7 @@
                     type="text"
                     placeholder="Search... (/ to focus)"
                     v-model="term"
-                    @keydown="search"
+                    @input="search"
                     ref="definitionSearch"
                 />
                 <Search />
@@ -43,7 +43,7 @@
                                 <transition-group name="search" mode="in-out">
                                     <div
                                         class="definition-item-search-result"
-                                        :class="{ 'definition-item-search-result-selected': isMatch(result.id) }"
+                                        :class="{ 'definition-item-search-result-selected': isMatch(result.item.id) }"
                                         v-for="result in results"
                                         :key="result.item.id"
                                     >
@@ -178,15 +178,18 @@ export default {
             this.custom.status = !this.custom.status
         },
         select(match) {
+            console.log(match)
             const links = this.comparison
             const elem = links.filter(item => {
                 return match.id == item.id
             })
+            console.log(elem)
             this.selection = elem
         },
         isMatch(match) {
             if (this.selection) {
                 if (match == this.selection[0].id) {
+                    console.log(match, this.selection[0].id)
                     return true
                 }
             }
