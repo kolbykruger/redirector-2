@@ -44,8 +44,10 @@ export default {
 
             links.forEach(link => {
                 let $Link = _this.createLink(link, 'new')
-                _this.newLinks.push($Link)
-                _this.$store.commit('addLink', { type: 'new', link: $Link })
+                if ($Link) {
+                    _this.newLinks.push($Link)
+                    _this.$store.commit('addLink', { type: 'new', link: $Link })
+                }
             })
         },
         processOldLinks(opts) {
@@ -63,15 +65,23 @@ export default {
                 // Instantiate [Link] object shape
                 let $Link = _this.createLink(link, 'old')
 
-                const matches = _this.createStringMatches($Link.url.pathname, analysis, newLinks)
-
-                $Link.matches = matches
-
-                _this.$store.commit('addLink', { type: 'old', link: $Link })
+                if ($Link) {
+                    const matches = _this.createStringMatches($Link.url.pathname, analysis, newLinks)
+                    $Link.matches = matches
+                    _this.$store.commit('addLink', { type: 'old', link: $Link })
+                }
             })
         },
         createLink(link, type) {
             const url = this.createURL(link)
+
+            // Prevent blacklist files from being entered into the
+            const urlParts = url.pathname.split('.')
+            const urlEndPart = urlParts[urlParts.length - 1]
+            const blacklist = ['png', 'PNG', 'jpg', 'JPG', 'jpeg', 'JPEG', 'gif', 'GIF', 'webp', 'WEBP', 'tif', 'TIF', 'pdf', 'PDF']
+            if (blacklist.some((v => urlEndPart === v))) {
+                return false
+            }
             return {
                 id: this.createStringHash(link),
                 status: false,

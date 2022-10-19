@@ -99,11 +99,12 @@ export default {
     }
     .grid {
         display: grid;
-        grid-template-columns: 45% 55%;
+        grid-template-columns: 4fr 5fr;
         grid-gap: 3em;
         height: 72vh;
         place-content: center;
         align-items: center;
+        padding: 1em;
     }
 
     &-text {
