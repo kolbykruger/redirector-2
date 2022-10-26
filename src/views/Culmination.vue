@@ -2,6 +2,12 @@
     <div class="page" id="culmination">
         <Pageheading title="Customize your redirects" />
 
+		<section class="actions">
+			<div class="container">
+				<button class="button button-size-small" @click="createCSV">Download as a CSV</button>
+			</div>
+		</section>
+
         <section class="points">
             <div class="container">
                 <h3 class="font-size-base font-weight-medium">URLs</h3>
@@ -130,6 +136,7 @@ export default {
     },
     data() {
         return {
+			allLinks: null,
             links: null,
             delimiters: {
                 start: 'RewriteRule ^',
@@ -161,16 +168,43 @@ export default {
             }
         },
         copy() {},
+		createCSV() {
+			let csvContent = "data:text/csv;charset=utf-8,";
+			csvContent += 'Old, New' + "\r\n"
+			this.allLinks.forEach((link) => {
+				let oldLink = link.url.pathname
+				let newLink = link.redirect ? link.redirect[0].url.pathname : ''
+				let row = [oldLink, newLink]
+				csvContent+= row + "\r\n"
+			})
+
+			let encodedUri = encodeURI(csvContent);
+			let link = document.createElement("a");
+			let timestamp = Date.now()
+			link.setAttribute("href", encodedUri);
+			link.setAttribute("download", `redirects-${timestamp}.csv`);
+			document.body.appendChild(link); // Required for FF
+
+			link.click();
+		}
     },
     mounted() {
         // Empty links
         this.links = null
+        this.allLinks = null
 
         // Get new links
         const links = this.$store.getters.getLinks('old')
         this.links = links.filter(link => {
             return link.status == true
         })
+
+		// Get all links
+		this.allLinks = links.sort((a, b) => {
+			if (a.redirect && b.redirect) {
+				a.redirect.length > b.redirect.length ? 1 : -1
+			}
+		})
     },
 }
 </script>
